@@ -7,7 +7,7 @@ const getUserData = async (req, res) => {
       return res.json({ success: false, message: "User Not Found" });
     }
     res.json({
-      sucess: true,
+      success: true,
       userData: {
         name: user.name,
         isAccountVerified: user.isAccountVerified,

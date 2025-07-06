@@ -5,10 +5,12 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/mongodb");
 const authRouter = require("./Routes/authRoutes");
 const userRouter = require("./Routes/userRoutes");
+const allowedOrigins = ["http://localhost:5173"];
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true }));
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 const port = process.env.PORT || 1001;
 
 // API END Point.
