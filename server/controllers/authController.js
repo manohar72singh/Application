@@ -3,7 +3,10 @@ const bcrypt = require("bcryptjs");
 //
 const jwt = require("jsonwebtoken");
 const transporter = require("../config/sendEmail");
-
+const {
+  EMAIL_VERIFY_TEMPLATE,
+  PASSWORD_RESET_TEMPLATE,
+} = require("../config/emailTemplets");
 const register = async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
@@ -107,7 +110,11 @@ const sendVerifyOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Account Verification OTP",
-      text: `Your OTP is ${otp}. verify your account using this OTP.`,
+      // text: `Your OTP is ${otp}. verify your account using this OTP.`,
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
+        "{{email}}",
+        user.email
+      ),
     };
     await transporter.sendMail(mailOption);
     return res.json({
@@ -176,7 +183,11 @@ const sendResetOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Password Reset OTP",
-      text: `Your OTP for resetting your password is ${otp}. Use this OTP to procced with resetting password.`,
+      // text: `Your OTP for resetting your password is ${otp}. Use this OTP to procced with resetting password.`,
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
+        "{{email}}",
+        user.email
+      ),
     };
     await transporter.sendMail(mailOption);
     return res.json({ success: true, message: "OTP send to your Email" });
@@ -210,6 +221,13 @@ const resetPassword = async (req, res) => {
     user.resetOtp = "";
     user.resetOtpExpireAt = 0;
     await user.save();
+    const mailOption = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "Password Reset successfull",
+      text: "Your Password Reset Succesfully. ",
+    };
+    await transporter.sendMail(mailOption);
     return res.json({
       success: true,
       message: "Password has been reset Successfully",
