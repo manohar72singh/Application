@@ -12,12 +12,12 @@ app.use(cookieParser());
 
 // app.use(cors({ origin: allowedOrigins, credentials: true }));
 // const port = process.env.PORT || 1001;
-// app.use(
-//   cors({
-//     origin: "https://auth-application-7th3.vercel.app", // ✅ allow your Vercel domain
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: "https://auth-application-7th3.vercel.app", // ✅ allow your Vercel domain
+    credentials: true,
+  })
+);
 
 // 👇 ALLOW your Vercel frontend URL
 const allowedOrigins = [
