@@ -3,7 +3,8 @@ import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContent } from "../Context/AppContext";
 import { toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios"; // Use the axios instance created in client/src/axios.js
 export default function Navbar() {
   const navigate = useNavigate();
   const { userData, backendUrl, setUserData, setIsLoggedIn } =

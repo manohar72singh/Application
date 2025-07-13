@@ -1,4 +1,7 @@
-import axios from "axios";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
+// import axios from "axios";
+import axios from "../axios"; // Use the axios instance created in client/src/axios.js
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 

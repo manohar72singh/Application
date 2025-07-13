@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios"; // Use the axios instance created in client/src/axios.js
 import { AppContent } from "../Context/AppContext";
 
 export default function EmailVerify() {

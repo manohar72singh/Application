@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContent } from "../Context/AppContext";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios"; // Use the axios instance created in client/src/axios.js
 import { toast } from "react-toastify";
 export default function Login() {
   const [state, setState] = useState("Sign Up");
