@@ -63,6 +63,12 @@ const allowedOrigins = [
   "https://auth-application-7th3.vercel.app",
 ];
 
+// ✅ Step 2: Log the origin for every incoming request (DEBUG)
+app.use((req, res, next) => {
+  console.log("🔥 Incoming Origin:", req.headers.origin);
+  next();
+});
+
 // ✅ CORS Configuration
 app.use(
   cors({
